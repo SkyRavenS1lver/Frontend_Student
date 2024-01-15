@@ -26,43 +26,49 @@
     <td th:text="${data.nama}"></td>
     <td th:text="${data.age}"></td>
     <td>
-      <ul style="margin:0;padding:0"><button type="button" class="btn btn-block btn-primary"
-                                             data-toggle="modal${data.id}" data-target="#modal${data.id}" th:value="${data.id}">Update</button></ul>
-      <div class="modal fade" id="modal${data.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <ul style="margin:0;padding:0">
+        <button  onclick="update(this.id)" th:attr="id=${data.id}" type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#modal2">
+          Update
+        </button>
+        </ul>
+      <div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModal">Data Form</h5>
+              <h5 class="modal-title" id="Title">Update</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
               <form role="form" method="post" th:action="@{/update}" th:object="${dataUpdate}">
-                <input name="id" th:field="*{id}" value="${data.id}" hidden id="id">
                 <div class="form-group">
+                  <input hidden name="id" th:field="*{id}" class="form-control" id="id">
                   <label for="nim">Nim</label>
-                  <input type="text" required name="nim" th:field="*{nim}" class="form-control" id="nim${data.id}" placeholder="Masukkan Nim Anda">
+                  <input type="text" required name="nim" th:field="*{nim}" class="form-control" id="nimUpdate" placeholder="Masukkan Nim Anda">
                 </div>
                 <div class="form-group">
                   <label for="namaDepan">Nama Depan</label>
-                  <input type="text" required name="namaDepan" th:field="*{namaDepan}" class="form-control" id="namaDepan${data.id}" placeholder="Masukkan Nama Depan Anda">
+                  <input type="text" required name="namaDepan" th:field="*{namaDepan}" class="form-control" id="namaDepanUpdate" placeholder="Masukkan Nama Depan Anda">
                 </div>
                 <div class="form-group">
                   <label for="namaBelakang">Nama Belakang</label>
-                  <input type="text" required name="namaBelakang" th:field="*{namaBelakang}" class="form-control" id="namaBelakang${data.id}" placeholder="Masukkan Nama Belakang Anda">
+                  <input type="text" required name="namaBelakang" th:field="*{namaBelakang}" class="form-control" id="namaBelakangUpdate" placeholder="Masukkan Nama Belakang Anda">
                 </div>
                 <div class="form-group">
                   <label for="tanggal">Tanggal Lahir</label>
-                  <input type="date" required name="tanggal_lahir" th:field="*{tanggal_lahir}" class="form-control" id="tanggal${data.id}" placeholder="YYYY-MM-DD">
+                  <input type="date" required name="tanggal_lahir" th:field="*{tanggal_lahir}" class="form-control" id="tanggalUpdate" placeholder="YYYY-MM-DD">
                 </div>
-                <button type="submit" id="submit${data.id}" class="btn btn-success">Update</button>
+                <button type="submit" id="submitUpdate" class="btn btn-success">Update</button>
               </form>
             </div>
           </div>
         </div>
       </div>
-      <ul style="margin:0;padding:0"><button class="btn btn-block btn-danger" th:value="${data.id}">Delete</button></ul>
+      <ul style="margin:0;padding:0">
+          <button type="button" onclick="deleteData(this.id)" th:attr="id=${data.id}" class="btn btn-block btn-danger">Delete</button>
+
+      </ul>
     </td>
   </tr>
   </tbody>
@@ -113,12 +119,25 @@
       </div>
     </div>
   </div>
+  <form role="form" method="post" th:action="@{/delete}" th:object="${idDelete}">
+    <input hidden name="idDelete" th:field="*{id}" id="idDelete" class="form-control">
+    <button hidden id="submits" type="submit" class="btn btn-block btn-danger">Delete</button>
+  </form>
 </section>
 
 
 <script>
 function submit() {
   document.getElementById("submit").click();
+}
+function update(val) {
+  document.getElementById("id").value = val;
+}
+function deleteData(val) {
+if(confirm("Are You Sure You Want To Delete This?") == true){
+  document.getElementById("idDelete").value = val;
+  document.getElementById("submits").click();
+}
 }
 </script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

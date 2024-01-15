@@ -48,6 +48,17 @@ public class StudentUpdate {
         return tanggal_lahir;
     }
 
+    @Override
+    public String toString() {
+        return "StudentUpdate{" +
+                "id=" + id +
+                ", nim='" + nim + '\'' +
+                ", namaDepan='" + namaDepan + '\'' +
+                ", namaBelakang='" + namaBelakang + '\'' +
+                ", tanggal_lahir=" + tanggal_lahir +
+                '}';
+    }
+
     public void setTanggal_lahir(Date tanggal_lahir) {
         this.tanggal_lahir = tanggal_lahir;
     }
