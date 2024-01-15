@@ -30,10 +30,5 @@ public class Controller {
         API.updateStudent(studentInsert);
         return "redirect:/";
     }
-    @PostMapping("/delete")
-    public String update(@ModelAttribute("data") StudentInsert studentInsert){
-        API.updateStudent(studentInsert);
-        return "redirect:/";
-    }
 
 }
