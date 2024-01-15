@@ -21,7 +21,7 @@ public class API {
 
     public static List<StudentDto> getAllData(){
         ResponseFromApi<List<StudentDto>> responseFromApi = restTemplate.getForObject(uri, ResponseFromApi.class);
-        if (responseFromApi.getData() != null) {
+        if (responseFromApi != null) {
             return responseFromApi.getData();
         }
         else {
